@@ -1,8 +1,8 @@
-import React from "react";
+import React, { Component } from "react";
 
 import "./todo-list-item.css";
 
-export default class TodoListItem extends React.Component {
+export default class TodoListItem extends Component {
   render() {
     const { label, important = false } = this.props;
     const style = {
