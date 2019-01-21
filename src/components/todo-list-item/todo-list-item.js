@@ -2,7 +2,7 @@ import React from "react";
 
 import "./todo-list-item.css";
 
-class TodoListItem extends React.Component {
+export default class TodoListItem extends React.Component {
   render() {
     const { label, important = false } = this.props;
     const style = {
@@ -33,5 +33,3 @@ class TodoListItem extends React.Component {
     );
   }
 }
-
-export default TodoListItem;
