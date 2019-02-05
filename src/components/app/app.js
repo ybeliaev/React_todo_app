@@ -17,7 +17,15 @@ export default class App extends Component {
     ]
   };
   makeDelete = id => {
-    this.setState(() => {});
+    this.setState(({ todoData }) => {
+      const idx = todoData.findIndex(el => el.id === id);
+      const before = todoData.slice(0, idx);
+      const after = todoData.slice(idx + 1);
+      const newArr = [...before, ...after];
+      return {
+        todoData: newArr
+      };
+    });
   };
 
   render() {
