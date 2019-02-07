@@ -9,6 +9,8 @@ import ItemAddForm from "../item-add-form";
 import "./app.css";
 
 export default class App extends Component {
+  maxId = 100;
+
   state = {
     todoData: [
       { label: "Drink Coffee", important: false, id: 1 },
@@ -28,6 +30,19 @@ export default class App extends Component {
       };
     });
   };
+  makeNewItem = text => {
+    const newItem = {
+      label: text,
+      important: false,
+      id: this.maxId++
+    };
+    this.setState(({ todoData }) => {
+      const newArr = [...todoData, newItem];
+      return {
+        todoData: newArr
+      };
+    });
+  };
 
   render() {
     return (
@@ -38,7 +53,7 @@ export default class App extends Component {
           <ItemStatusFilter />
         </div>
         <TodoList todos={this.state.todoData} onDeleted={this.makeDelete} />
-        <ItemAddForm />
+        <ItemAddForm onAddItem={this.makeNewItem} />
       </div>
     );
   }
