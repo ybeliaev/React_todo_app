@@ -43,10 +43,10 @@ export default class App extends Component {
       };
     });
   };
-  onToggleImportant = id => {
+  makeToggleImportant = id => {
     console.log("Toggle important", id);
   };
-  onToggleDone = id => {
+  makeToggleDone = id => {
     console.log("Done", id);
   };
 
@@ -58,7 +58,12 @@ export default class App extends Component {
           <SearchPanel />
           <ItemStatusFilter />
         </div>
-        <TodoList todos={this.state.todoData} onDeleted={this.makeDelete} />
+        <TodoList
+          todos={this.state.todoData}
+          onDeleted={this.makeDelete}
+          onToggleImportant={this.makeToggleImportant}
+          onToggleDone={this.makeToggleDone}
+        />
         <ItemAddForm onAddItem={this.makeNewItem} />
       </div>
     );
