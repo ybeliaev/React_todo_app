@@ -9,9 +9,8 @@ export default class ItemAddForm extends Component {
       <div className="item-add-form">
         <button
           className="btn btn-warning"
-          onClick={() => this.props.onAddItem("Hello World")}
+          onClick={() => onAddItem("Hello World")}
         >
-          {" "}
           Add item
         </button>
       </div>

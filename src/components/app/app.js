@@ -43,6 +43,12 @@ export default class App extends Component {
       };
     });
   };
+  onToggleImportant = id => {
+    console.log("Toggle important", id);
+  };
+  onToggleDone = id => {
+    console.log("Done", id);
+  };
 
   render() {
     return (
