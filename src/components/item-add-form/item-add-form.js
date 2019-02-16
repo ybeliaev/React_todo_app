@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import "./item-add-form.css";
 
 export default class ItemAddForm extends Component {
-  state: {
+  state = {
     label: ""
   };
   onLabelChange = e => {
@@ -14,7 +14,9 @@ export default class ItemAddForm extends Component {
   onSubmit = e => {
     e.preventDefault();
     this.props.onAddItem(this.state.label);
-    this.state.label = "";
+    this.setState({
+      label: ""
+    });
   };
   render() {
     return (
@@ -24,6 +26,7 @@ export default class ItemAddForm extends Component {
           className="form-control"
           onChange={this.onLabelChange}
           placeholder="Whats need to be done?"
+          value={this.state.label}
         />
         <button className="btn btn-warning">Add item</button>
       </form>
