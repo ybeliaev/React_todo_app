@@ -77,8 +77,11 @@ export default class App extends Component {
       if (term === 0) {
         return items;
       }
-      return elem.label.indexOf(term) > -1;
+      return elem.label.toLowerCase().indexOf(term.toLowerCase()) > -1;
     });
+  }
+  makeSearch(term) {
+    this.setState({ term });
   }
   render() {
     const { todoData, term } = this.state; // term - искомый элемент
@@ -89,7 +92,7 @@ export default class App extends Component {
       <div className="todo-app">
         <AppHeader toDo={todoCount} done={doneCount} />
         <div className="top-panel d-flex">
-          <SearchPanel />
+          <SearchPanel makeSearchChange={this.makeSearch} />
           <ItemStatusFilter />
         </div>
         <TodoList
