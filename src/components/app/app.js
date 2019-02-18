@@ -17,7 +17,8 @@ export default class App extends Component {
       this.createTodoItem("Create React App"),
       this.createTodoItem("Study Bible"),
       this.createTodoItem("Read book of Hemingway")
-    ]
+    ],
+    term: ""
   };
   createTodoItem(label) {
     return {
@@ -71,9 +72,17 @@ export default class App extends Component {
       };
     });
   };
-
+  search(items, term) {
+    return items.filter(elem => {
+      if (term === 0) {
+        return items;
+      }
+      return elem.label.indexOf(term) > -1;
+    });
+  }
   render() {
-    const { todoData } = this.state;
+    const { todoData, term } = this.state; // term - искомый элемент
+    const visibleItem = this.search(todoData, term);
     const doneCount = todoData.filter(el => el.done).length;
     const todoCount = todoData.length - doneCount;
     return (
@@ -84,7 +93,7 @@ export default class App extends Component {
           <ItemStatusFilter />
         </div>
         <TodoList
-          todos={todoData}
+          todos={visibleItem}
           onDeleted={this.makeDelete}
           onToggleImportant={this.makeToggleImportant}
           onToggleDone={this.makeToggleDone}
