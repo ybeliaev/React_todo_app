@@ -19,7 +19,7 @@ export default class App extends Component {
       this.createTodoItem("Read book of Hemingway")
     ],
     term: "",
-    filter: "active"
+    filter: "all"
   };
   createTodoItem(label) {
     return {
@@ -84,7 +84,7 @@ export default class App extends Component {
   makeSearch = term => {
     this.setState({ term });
   };
-  filter(items, filter) {
+  makeFilter(items, filter) {
     switch (filter) {
       case "all":
         return items;
@@ -96,9 +96,12 @@ export default class App extends Component {
         return items;
     }
   }
+  makeFilterChange = filter => {
+    this.setState({ filter });
+  };
   render() {
-    const { todoData, term } = this.state; // term - искомый элемент
-    const visibleItem = this.search(todoData, term);
+    const { todoData, term, filter } = this.state; // term - искомый элемент
+    const visibleItem = this.makeFilter(this.search(todoData, term), filter);
     const doneCount = todoData.filter(el => el.done).length;
     const todoCount = todoData.length - doneCount;
     return (
@@ -106,7 +109,10 @@ export default class App extends Component {
         <AppHeader toDo={todoCount} done={doneCount} />
         <div className="top-panel d-flex">
           <SearchPanel makeSearchChange={this.makeSearch} />
-          <ItemStatusFilter />
+          <ItemStatusFilter
+            filter={filter}
+            onFilterChange={this.makeFilterChange}
+          />
         </div>
         <TodoList
           todos={visibleItem}
