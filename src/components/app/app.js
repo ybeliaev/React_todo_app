@@ -84,7 +84,18 @@ export default class App extends Component {
   makeSearch = term => {
     this.setState({ term });
   };
-  filter(items, filter) {}
+  filter(items, filter) {
+    switch (filter) {
+      case "all":
+        return items;
+      case "active":
+        return items.filter(elem => !elem.done);
+      case "done":
+        return items.filter(elem => elem.done);
+      default:
+        return items;
+    }
+  }
   render() {
     const { todoData, term } = this.state; // term - искомый элемент
     const visibleItem = this.search(todoData, term);
