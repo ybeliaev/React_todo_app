@@ -18,7 +18,8 @@ export default class App extends Component {
       this.createTodoItem("Study Bible"),
       this.createTodoItem("Read book of Hemingway")
     ],
-    term: ""
+    term: "",
+    filter: "active"
   };
   createTodoItem(label) {
     return {
@@ -80,9 +81,10 @@ export default class App extends Component {
       return elem.label.toLowerCase().indexOf(term.toLowerCase()) > -1;
     });
   }
-  makeSearch(term) {
+  makeSearch = term => {
     this.setState({ term });
-  }
+  };
+  filter(items, filter) {}
   render() {
     const { todoData, term } = this.state; // term - искомый элемент
     const visibleItem = this.search(todoData, term);
